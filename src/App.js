@@ -18,7 +18,8 @@ const App = () => (
   <Router>
     <Navbar />
     <Routes>
-      <Route path="/card" element={<p>React App</p>} />
+      <Route path="/" element={<p>React App</p>} />
+      <Route path="*" element={<p>Oooops, this is not a valid route!</p>} />
     </Routes>
   </Router>
 );

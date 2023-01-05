@@ -1,6 +1,6 @@
 import { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import { useAuthenticated } from '../hooks/useAuthenticated';
+import { useNavigate } from 'react-router-dom';
+import { useAuthenticated } from '../../hooks/useAuthenticated';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -16,8 +16,8 @@ import NavDrawer from './NavDrawer';
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-  // const navigate = useNavigate();
-  // const [isLoggedIn] = useAuthenticated();
+  const navigate = useNavigate();
+  const [isLoggedIn] = useAuthenticated();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -56,14 +56,14 @@ const Navbar = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      {/* {isLoggedIn ? (
+      {isLoggedIn ? (
         <>
           <MenuItem onClick={() => navigate('/logout')}>Log Out</MenuItem>
           <MenuItem onClick={handleMenuClose}>Add Book</MenuItem>
         </>
       ) : (
         <MenuItem onClick={() => navigate('/login')}>Log In</MenuItem>
-      )} */}
+      )}
     </Menu>
   );
 
