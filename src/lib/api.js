@@ -10,7 +10,7 @@ const ENDPOINTS = {
   allBooks: '/api/books',
   allGenreNames: '/api/genres/names',
   login: '/login',
-  register: '/register',
+  register: 'api/register',
   cloudinary: `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
   singleBook: (id) => `/api/books/${id}`,
   singleGenre: (id) => `/api/genres/${id}/books`,

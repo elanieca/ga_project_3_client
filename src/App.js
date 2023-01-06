@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/navigation/Navbar';
+import Register from './components/auth/Register';
 
 window.Buffer = window.Buffer || require('buffer').Buffer;
 
@@ -18,6 +19,7 @@ const App = () => (
   <Router>
     <Navbar />
     <Routes>
+      <Route path="/register" element={<Register/>} />
       <Route path="/" element={<p>React App</p>} />
       <Route path="*" element={<p>Oooops, this is not a valid route!</p>} />
     </Routes>
