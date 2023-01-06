@@ -1,46 +1,38 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { API } from '../lib/api';
-import { NOTIFY } from '../lib/notifications';
 import { AUTH } from '../lib/auth';
-import { useAuthenticated } from '../hooks/useAuthenticated';
+import { API } from '../lib/api';
 
-import { TextField, Button } from '@mui/material';
-import { Container } from '@mui/system';
+import Container from '@mui/material/Container';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 
-export default function Login() {
+const initialFormData = {
+  email: '',
+  password: ''
+};
+
+const Login = () => {
   const navigate = useNavigate();
-  const [formFields, setFormFields] = useState({
-    email: '',
-    password: ''
-  });
-  const [error, setError] = useState({ email: false, password: false });
-  const [isLoggedIn] = useAuthenticated();
-
-  if (isLoggedIn) {
-    navigate('/');
-  }
+  const [formFields, setFormFields] = useState(initialFormData);
+  const [error, setError] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     API.POST(API.ENDPOINTS.login, formFields)
-      .then(({ data }) => {
-        NOTIFY.SUCCESS(data.message);
-        AUTH.setToken(data.token);
+      .then(({ data: { token } }) => {
+        AUTH.setToken(token);
         navigate('/');
       })
-      .catch((e) => {
-        console.log(e);
-        if (e.response.data.message === 'Unauthorized') {
-          setError({ ...error, password: true });
-        } else {
-          setError({ email: true, password: true });
-        }
+      .catch(({ response }) => {
+        console.error(response);
+        setError(true);
       });
   };
 
-  const handleChange = (e) => {
-    setFormFields({ ...formFields, [e.target.name]: e.target.value });
+  const handleChange = ({ target: { name, value } }) => {
+    setFormFields({ ...formFields, [name]: value });
   };
 
   return (
@@ -53,39 +45,40 @@ export default function Login() {
         height: 500
       }}
     >
-      <form onSubmit={handleSubmit}>
-        <div>
+      <Box component="form" onSubmit={handleSubmit}>
+        <Box>
           <TextField
             size="small"
-            name="email"
-            id="email"
-            type="email"
-            label="Email"
-            placeholder="Email"
             required={true}
             value={formFields.email}
+            error={error}
             onChange={handleChange}
-            error={error.email}
+            type="email"
+            label="Email"
+            id="email"
+            name="email"
+            placeholder="Email"
             sx={{ mb: 2 }}
           />
-        </div>
-        <div>
+        </Box>
+        <Box>
           <TextField
             size="small"
-            name="password"
-            id="password"
-            required={true}
-            type="password"
             label="Password"
-            placeholder="password"
+            type="password"
+            required={true}
             value={formFields.password}
+            error={error}
             onChange={handleChange}
-            variant="outlined"
-            error={error.password}
+            id="password"
+            name="password"
+            placeholder="Password"
           />
-        </div>
+        </Box>
         <Button type="submit">Login</Button>
-      </form>
+      </Box>
     </Container>
   );
-}
+};
+
+export default Login;
