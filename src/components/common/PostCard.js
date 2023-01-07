@@ -32,7 +32,7 @@ export default function PostCard({
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'center',
+              justifyContent: 'flexstart',
               alignItems: 'center'
             }}
           >

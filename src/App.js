@@ -5,6 +5,7 @@ import Register from './components/auth/Register';
 import Welcome from './components/Welcome';
 import PostCard from './components/common/PostCard';
 import LatestPosts from './components/LatestPosts';
+import AddBook from './components/AddBook';
 window.Buffer = window.Buffer || require('buffer').Buffer;
 
 // Navigation -> Navbar, NavDrawer, Avatar
@@ -22,6 +23,7 @@ const App = () => (
   <Router>
     <Navbar />
     <Routes>
+      <Route path="/dashboard/add-book" element={<AddBook />} />
       <Route path="/LatestPosts" element={<LatestPosts />} />
       <Route path="/register" element={<Register />} />
       <Route path="/" element={<p>React App</p>} />
