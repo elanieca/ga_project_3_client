@@ -5,9 +5,17 @@ import { Container, Grid, Typography, Box, Button } from '@mui/material';
 
 import PostCard from './common/PostCard';
 
+
+
 const LatestPosts = ({ searchedBooks }) => {
   const [books, setBooks] = useState(searchedBooks);
 
+  // const [value, setValue] = useState();
+  // const refresh = () => {
+  //   console.log('refresh');
+  //   setValue({});
+  // };
+  
   useEffect(() => {
     API.GET(API.ENDPOINTS.latestBooks)
       .then(({ data }) => {
@@ -25,7 +33,7 @@ const LatestPosts = ({ searchedBooks }) => {
   return (
     <>
       <Container
-        maxWidth="lg"
+        maxWidth="600px"
         sx={{
           display: 'flex',
           justifyContents: 'center',
@@ -34,7 +42,7 @@ const LatestPosts = ({ searchedBooks }) => {
         }}
       >
         <Box
-          sx={{ 
+          sx={{
             mb: 2,
             display: 'flex',
             justifyContents: 'center',
@@ -42,15 +50,15 @@ const LatestPosts = ({ searchedBooks }) => {
             flexDirection: 'column'
           }}
         >
-          <Typography sx={{ mb: 2 }}variant="h5">
+          <Typography sx={{ mb: 2 }} variant="h5">
             Latest posts from users you follow:
           </Typography>
-          <Button variant="contained" color="primary">
+          <Button onClick={''} variant="contained" color="primary">
             Refresh
           </Button>
         </Box>
-        <Grid 
-          sx={{ 
+        <Grid
+          sx={{
             flexDirection: 'column',
             justifyContents: 'center',
             alignItems: 'center'
