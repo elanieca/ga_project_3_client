@@ -7,6 +7,12 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import CssBaseline from '@mui/material/CssBaseline';
 import getDesignTokens from './styles/theme';
 import Login from './components/auth/Login';
+import Register from './components/auth/Register';
+import Welcome from './components/Welcome';
+import LatestPosts from './components/LatestPosts';
+import AddBook from './components/AddBook';
+import MyLibrary from './components/Dashboard';
+import Favorites from './components/Favorites';
 
 window.Buffer = window.Buffer || require('buffer').Buffer;
 
@@ -35,8 +41,13 @@ const App = () => {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" element={<p>Activity feed</p>} />
+          <Route path="/dashboard/favorites" element={<Favorites />} />
+          <Route path="/dashboard/my-library" element={<MyLibrary />} /> 
+          <Route path="/dashboard/add-book" element={<AddBook />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/welcome" element={<Welcome />} />
+          <Route path="/" element={<LatestPosts />} />
           <Route path="*" element={<p>Oooops, this is not a valid route!</p>} />
         </Routes>
       </Router>
