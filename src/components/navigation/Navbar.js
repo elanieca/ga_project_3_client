@@ -7,8 +7,9 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import MenuList from '@mui/material/MenuList';
+import MenuItem from '@mui/material/MenuItem';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import Avatar from '@mui/material/Avatar';
 import NavDrawer from './NavDrawer';
@@ -57,12 +58,20 @@ const Navbar = () => {
       onClose={handleMenuClose}
     >
       {isLoggedIn ? (
-        <>
+        <MenuList sx={{ width: 1 }} disablePadding>
+          <MenuItem onClick={handleMenuClose}>My Dashboard</MenuItem>
           <MenuItem onClick={() => navigate('/logout')}>Log Out</MenuItem>
-          <MenuItem onClick={handleMenuClose}>Add Book</MenuItem>
-        </>
+        </MenuList>
       ) : (
-        <MenuItem onClick={() => navigate('/login')}>Log In</MenuItem>
+        <MenuItem
+          sx={{ width: 1 }}
+          onClick={() => {
+            handleMenuClose();
+            navigate('/login');
+          }}
+        >
+          Log In
+        </MenuItem>
       )}
     </Menu>
   );
