@@ -22,42 +22,83 @@ export default function PostCard({
   const navigate = useNavigate();
   const navigateToBook = () => navigate(`/diary-entries/${id}`);
   const date = createdAt.slice(0, 10).split('-');
-  const dateAdded = [date[2].substr(0,4),'-' + date[1], '-' + date[0]];
+  const dateAdded = [date[2].substr(0, 4), '-' + date[1], '-' + date[0]];
 
   return (
-    <Card>
-      <CardActionArea onClick={navigateToBook}>
-        <CardContent sx={{ display: 'flex' }}>
+    <Card sx={{ height: 200, maxWidth: 550 }}>
+      <CardActionArea onClick={navigateToBook} sx={{ height: 1, width: 1 }}>
+        <CardContent
+          sx={{
+            width: 1,
+            height: 1,
+            display: 'flex',
+            justifyContent: 'space-between'
+          }}
+        >
           <Box
             sx={{
               mr: 2,
               width: '25%',
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'center',
               alignItems: 'center'
             }}
           >
-            <Avatar />
-            <Typography sx={{ mb: 2 }} variant="text.secondary" component="div">
-              {addedBy.username}
-            </Typography>
-            <Typography sx={{ mb: 2 }} variant="text.secondary" component="div">
-              <p>Date added</p>
-              {dateAdded}
-            </Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                alignItems: 'flex-start',
+                width: '100%',
+                height: 0.9
+              }}
+            >
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  width: '70%'
+                }}
+              >
+                <Avatar />
+                <Typography
+                  sx={{ mt: 1, mb: 1, ml: 1 }}
+                  variant="text.secondary"
+                  component="div"
+                >
+                  {addedBy.username}
+                </Typography>
+              </Box>
+              <Typography
+                sx={{ fontWeight: 'fontWeightLight', ml: 1 }}
+                variant="text.secondary"
+              >
+                {dateAdded}
+              </Typography>
+            </Box>
           </Box>
           <Box sx={{ width: '50%' }}>
-            <p>Title</p>
-            <Typography sx={{ mb: 1 }} color="text.primary" component="div">
+            <Typography
+              sx={{
+                fontWeight: 'fontWeightMedium',
+                fontSize: '20px',
+                mb: 1,
+                mr: 2,
+                mt: -0.5
+              }}
+              color="text.primary"
+              component="div"
+            >
               {title}
             </Typography>
-            <p>Author</p>
-            <Typography sx={{ mb: 1 }} color="text.primary" component="div">
+            <Typography sx={{ mb: 1, fontSize: '15px' }} color="text.secondary">
               {author}
             </Typography>
-            <p>Genre</p>
-            <Typography color="text.primary" component="div">
+            <Typography
+              color="text.secondary"
+              sx={{ fontWeight: 'fontWeightLight' }}
+            >
               {genre}
             </Typography>
           </Box>
