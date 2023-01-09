@@ -42,7 +42,7 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/dashboard/favorites" element={<Favorites />} />
-          <Route path="/dashboard/my-library" element={<MyLibrary />} /> 
+          <Route path="/dashboard/my-library" element={<MyLibrary />} />
           <Route path="/dashboard/add-book" element={<AddBook />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />

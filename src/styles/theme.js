@@ -22,7 +22,10 @@ const lightTheme = {
   },
   ...{
     typography: {
-      fontFamily: 'Do Hyeon',
+      fontFamily: 'Poppins',
+      fontWeightLight: 200,
+      fontWeightMedium: 600,
+      fontWeightBold: 800,
       fontSize: 16
     },
     shape: {
