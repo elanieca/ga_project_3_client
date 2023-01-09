@@ -143,7 +143,7 @@ export default function Register() {
           />
         </div>
         <div>
-          <Button variant="contained" component="label">
+          <Button sx={{ bgcolor: 'secondary.light' }}variant="contained" component="label">
             Upload Picture
             <input
               name="profile-picture"
@@ -165,7 +165,7 @@ export default function Register() {
             {!file ? (
               <Avatar />
             ) : (
-              <CheckCircleIcon fontSize="large" sx={{ color: 'green' }} />
+              <CheckCircleIcon fontSize="large" sx={{ color: 'primary.dark' }} />
             )}
           </IconButton>
         </div>
@@ -173,7 +173,7 @@ export default function Register() {
           fullWidth
           sx={{ mt: 2 }}
           variant="contained"
-          color="success"
+          // color="success"
           type="submit"
         >
           Create Account
