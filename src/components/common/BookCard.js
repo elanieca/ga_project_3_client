@@ -1,83 +1,61 @@
 import { useNavigate } from 'react-router-dom';
-import { Grid } from '@mui/material';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import Fab from '@mui/material/Fab';
 
 import {
   Card,
   CardContent,
   CardMedia,
   Typography,
-  CardActionArea
+  CardActionArea,
+  Box
+  // Button
 } from '@mui/material';
 
-export default function BookCard({ title, image, author, genre, id }) {
+export default function BookCard({ title, author, genre, image, id }) {
   const navigate = useNavigate();
-  const navigateToBookShow = () => navigate('/diary-entries');
+  const navigateToBook = () => navigate(`/diary-entries/${id}`);
 
   return (
-    <Grid container>
-      <Card sx={{ maxWidth: 345, height: 400 }}>
-        <CardActionArea onClick={navigateToBookShow}>
-          <CardMedia
-            component="img"
-            image={image}
-            alt={title}
-            sx={{ maxHeight: 345, objectFit: 'contain' }}
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+    <Card sx={{ width: 400, minHeight: 150 }}>
+      <CardActionArea onClick={navigateToBook}>
+        <CardContent sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'flexstart',
+              alignItems: 'center'
+            }}
+          >
+            <Fab size="small" disabled aria-label="like">
+              <FavoriteIcon />
+            </Fab>
+          </Box>
+          <Box>
+            <p>Title</p>
+            <Typography sx={{ mb: 1 }} color="text.primary" component="div">
               {title}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <p>Author</p>
+            <Typography sx={{ mb: 1 }} color="text.primary" component="div">
               {author}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <p>Genre</p>
+            <Typography color="text.primary" component="div">
               {genre}
             </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-      <Card sx={{ maxWidth: 345, height: 400 }}>
-        <CardActionArea onClick={navigateToBookShow}>
-          <CardMedia
-            component="img"
-            image={image}
-            alt={title}
-            sx={{ maxHeight: 345, objectFit: 'contain' }}
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {title}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {author}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {genre}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-      <Card sx={{ maxWidth: 345, height: 400 }}>
-        <CardActionArea onClick={navigateToBookShow}>
-          <CardMedia
-            component="img"
-            image={image}
-            alt={title}
-            sx={{ maxHeight: 345, objectFit: 'contain' }}
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {title}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {author}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {genre}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-    </Grid>
+          </Box>
+          <Box>
+            <CardMedia
+              component="img"
+              image={image}
+              alt={title}
+              sx={{ maxHeight: 180, maxWidth: 100, objectFit: 'contain' }}
+            />
+          </Box>
+        </CardContent>
+      </CardActionArea>
+    </Card>
   );
 }
