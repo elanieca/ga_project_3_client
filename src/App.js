@@ -11,6 +11,7 @@ import Register from './components/auth/Register';
 import Welcome from './components/Welcome';
 import LatestPosts from './components/LatestPosts';
 import AddBook from './components/AddBook';
+import BookIndex from './components/BookIndex';
 import MyLibrary from './components/Dashboard';
 import Favorites from './components/Favorites';
 
@@ -44,6 +45,7 @@ const App = () => {
           <Route path="/dashboard/favorites" element={<Favorites />} />
           <Route path="/dashboard/my-library" element={<MyLibrary />} />
           <Route path="/dashboard/add-book" element={<AddBook />} />
+          <Route path="/diary-entries" element={<BookIndex />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/welcome" element={<Welcome />} />

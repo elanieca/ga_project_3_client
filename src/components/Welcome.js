@@ -1,30 +1,46 @@
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import { API } from '../lib/api';
+// import { image } from '../assets/book-background.png';
+// import { useEffect } from 'react';
+// import { API } from '../lib/api';
 
-import { Button } from '@mui/material';
+import { Button, Box } from '@mui/material';
 import { Container } from '@mui/system';
 
 export default function Welcome() {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    API.GET(API.ENDPOINTS.allBooks)
-      .then(({ data }) => console.log(data))
-      .catch(({ message, response }) => console.error(message, response));
-  }, []);
+  const image = require('../assets/book-background.png');
 
   return (
     <Container
+      style={{
+        backgroundImage: `url(${image})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover'
+        // width: '100vw',
+        // height: '100vh'
+        // minHeight: '100vh',
+        // minWidth: '100vh'
+      }}
       maxWidth="lg"
       sx={{
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center',
-        height: 500
+        alignItems: 'center'
+        // height: 500
       }}
     >
-      <Button onClick={() => navigate('/register')}>Get started!</Button>
+      <Box>
+        <h1> WELCOME </h1>
+      </Box>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => navigate('/register')}
+      >
+        Get started
+      </Button>
+      {/* <h1>Welcome to your book library</h1> */}
+      {/* <p>A hub to store all your favourite reads</p> */}
     </Container>
   );
 }
