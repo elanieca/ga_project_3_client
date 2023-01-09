@@ -9,12 +9,6 @@ import PostCard from './common/PostCard';
 
 const LatestPosts = ({ searchedBooks }) => {
   const [books, setBooks] = useState(searchedBooks);
-
-  // const [value, setValue] = useState();
-  // const refresh = () => {
-  //   console.log('refresh');
-  //   setValue({});
-  // };
   
   useEffect(() => {
     API.GET(API.ENDPOINTS.latestBooks)
@@ -33,7 +27,7 @@ const LatestPosts = ({ searchedBooks }) => {
   return (
     <>
       <Container
-        maxWidth="600px"
+        maxWidth="lg"
         sx={{
           display: 'flex',
           justifyContents: 'center',
@@ -53,7 +47,7 @@ const LatestPosts = ({ searchedBooks }) => {
           <Typography sx={{ mb: 2 }} variant="h5">
             Latest posts from users you follow:
           </Typography>
-          <Button onClick={''} variant="contained" color="primary">
+          <Button onClick={searchedBooks} variant="contained" color="primary">
             Refresh
           </Button>
         </Box>
