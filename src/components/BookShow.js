@@ -48,7 +48,7 @@ const BookShow = () => {
       <Container maxWidth="lg" sx={{ display: 'flex' }} className="BookShow">
         <Box>
           <img
-            style={{ width: 300, height: 420 }}
+            style={{ width: 300, height: 421 }}
             src={singleBook?.image}
             alt={singleBook?.title}
           />
