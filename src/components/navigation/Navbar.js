@@ -13,6 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import Avatar from '@mui/material/Avatar';
 import NavDrawer from './NavDrawer';
+import Logo from '../../assets/books-icon-2.png';
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -113,7 +114,7 @@ const Navbar = () => {
           >
             BOOKS
           </Typography>
-
+          <img src={Logo} />
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton
