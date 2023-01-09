@@ -12,33 +12,29 @@ export default function Welcome() {
 
   return (
     <Container
-      style={{
-        backgroundImage: `url(${image})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover'
-        // width: '100vw',
-        // height: '100vh'
-        // minHeight: '100vh',
-        // minWidth: '100vh'
-      }}
-      maxWidth="lg"
       sx={{
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
-        // height: 500
+        alignItems: 'center',
+        backgroundImage: `radial-gradient(circle, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2) ), url(${image})`,
+        backgroundSize: 'cover',
+        minWidth: '100vw',
+        minHeight: '100vh',
+        textAlign: 'center',
+        mt: -5
       }}
     >
       <Box>
-        <h1> WELCOME </h1>
+        <h1>WELCOME</h1>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => navigate('/register')}
+          sx={{ mt: 2 }}
+        >
+          Get started
+        </Button>
       </Box>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => navigate('/register')}
-      >
-        Get started
-      </Button>
       {/* <h1>Welcome to your book library</h1> */}
       {/* <p>A hub to store all your favourite reads</p> */}
     </Container>
