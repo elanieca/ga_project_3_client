@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthenticated } from '../../hooks/useAuthenticated';
+import { AUTH } from '../../lib/auth';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -40,6 +41,12 @@ const Navbar = () => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const logout = () => {
+    AUTH.logout();
+    handleMenuClose();
+    navigate('/welcome');
+  };
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -59,8 +66,15 @@ const Navbar = () => {
     >
       {isLoggedIn ? (
         <MenuList sx={{ width: 1 }} disablePadding>
-          <MenuItem onClick={handleMenuClose}>My Dashboard</MenuItem>
-          <MenuItem onClick={() => navigate('/logout')}>Log Out</MenuItem>
+          <MenuItem
+            onClick={() => {
+              handleMenuClose();
+              navigate('/dashboard/my-library');
+            }}
+          >
+            My Dashboard
+          </MenuItem>
+          <MenuItem onClick={logout}>Log Out</MenuItem>
         </MenuList>
       ) : (
         <MenuItem

@@ -8,8 +8,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  TextareaAutosize,
-  Typography
+  TextareaAutosize
 } from '@mui/material';
 import { API } from '../lib/api';
 import { useNavigate } from 'react-router-dom';
@@ -46,14 +45,11 @@ export default function AddBook() {
     e.preventDefault();
 
     API.POST(API.ENDPOINTS.allBooks, formDataWithRating, API.getHeaders())
-      .then(({ data }) => {
-        navigate(`/diary-entries/${data._id}`);
+      .then(() => {
+        navigate('/dashboard/my-library');
       })
-      .catch((e) => {
-        if (e.status === 401) {
-          setError(true);
-        }
-        console.log(e);
+      .catch(({ response }) => {
+        console.log(response);
       });
   };
 
@@ -136,7 +132,7 @@ export default function AddBook() {
             />
           </Box>
           <Box>
-            <BookRating rating={rating} setRating={setRating} />
+            <BookRating setRating={setRating} rating={rating} />
           </Box>
           <Box>
             <TextareaAutosize

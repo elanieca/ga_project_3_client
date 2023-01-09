@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
+
 import { API } from '../lib/api';
 
 import { Container, Grid, Typography, Box, Button } from '@mui/material';
 
 import PostCard from './common/PostCard';
+import { redirectToLogin } from '../lib/helpers';
 
 const LatestPosts = () => {
   const [books, setBooks] = useState(null);
   const [isRefreshed, setIsRefreshed] = useState(false);
+
+  redirectToLogin();
 
   useEffect(() => {
     API.GET(API.ENDPOINTS.latestBooks)

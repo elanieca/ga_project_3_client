@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { API } from '../lib/api';
+import { redirectToLogin } from '../lib/helpers';
 
 import { Container, Grid, Typography, Box } from '@mui/material';
 
@@ -7,6 +8,8 @@ import BookCard from './common/BookCard';
 
 const BookIndex = () => {
   const [books, setBooks] = useState(null);
+
+  redirectToLogin();
 
   useEffect(() => {
     API.GET(API.ENDPOINTS.allBooks)
@@ -43,7 +46,10 @@ const BookIndex = () => {
           </Typography>
         </Box>
         <Grid
-          maxWidth={'900px'}
+          maxWidth="1000px"
+          container
+          spacing={2}
+          columns={{ xs: 4, md: 8 }}
           sx={{
             display: 'flex',
             flexDirection: 'row',
@@ -53,7 +59,7 @@ const BookIndex = () => {
           }}
         >
           {books?.map((book) => (
-            <Grid sx={{ mb: 2 }} item xs={4} key={book._id}>
+            <Grid item xs={4} key={book._id}>
               <BookCard
                 title={book.title}
                 author={book.author}

@@ -39,10 +39,10 @@ const darkTheme = {
     mode: 'dark',
     ...{
       primary: {
-        main: '#ac8b80'
+        main: '#987265'
       },
       secondary: {
-        main: '#987265'
+        main: '#ac8b80'
       },
       background: {
         default: '#212121',
@@ -66,7 +66,7 @@ const darkTheme = {
     },
     typography: {
       fontFamily: 'Poppins',
-      fontWeightLight: 200,
+      fontWeightLight: 300,
       fontWeightMedium: 600,
       fontWeightBold: 800,
       fontSize: 16
