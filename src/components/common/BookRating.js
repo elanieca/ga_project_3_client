@@ -1,17 +1,17 @@
-import * as React from 'react';
+import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
-import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 
 export default function BookRating({ rating, setRating }) {
   return (
-    <Stack sx={{ mb: 2 }} spacing={1}>
+    <Box sx={{ ml: 0.4 }}>
+      <Typography component="legend">Rating</Typography>
       <Rating
-        rating={rating}
-        changeRating={setRating}
+        typeof="number"
         name="rating"
-        defaultValue={0}
-        size="large"
+        rating={rating}
+        onChange={({ target: { value } }) => setRating(value)}
       />
-    </Stack>
+    </Box>
   );
 }

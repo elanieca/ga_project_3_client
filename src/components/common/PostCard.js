@@ -25,14 +25,16 @@ export default function PostCard({
   const dateAdded = [date[2].substr(0,4),'-' + date[1], '-' + date[0]];
 
   return (
-    <Card sx={{ width: 600, minHeight: 150 }}>
+    <Card>
       <CardActionArea onClick={navigateToBook}>
-        <CardContent sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <CardContent sx={{ display: 'flex' }}>
           <Box
             sx={{
+              mr: 2,
+              width: '25%',
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'flexstart',
+              justifyContent: 'center',
               alignItems: 'center'
             }}
           >
@@ -45,7 +47,7 @@ export default function PostCard({
               {dateAdded}
             </Typography>
           </Box>
-          <Box>
+          <Box sx={{ width: '50%' }}>
             <p>Title</p>
             <Typography sx={{ mb: 1 }} color="text.primary" component="div">
               {title}

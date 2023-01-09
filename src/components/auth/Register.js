@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import * as React from 'react';
 
 import Avatar from '@mui/material/Avatar';
 import {
