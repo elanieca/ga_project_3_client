@@ -47,7 +47,7 @@ const LatestPosts = () => {
         }}
       >
         <Typography sx={{ mb: 2 }} variant="h5">
-          Latest posts from users you follow:
+          Latest posts from users
         </Typography>
         <Button onClick={handleClick} variant="contained" color="primary">
           Refresh

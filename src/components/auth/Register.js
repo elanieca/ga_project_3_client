@@ -13,6 +13,8 @@ import {
 
 import { API } from '../../lib/api';
 import { AUTH } from '../../lib/auth';
+import { blue } from '@mui/material/colors';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -141,7 +143,7 @@ export default function Register() {
           />
         </div>
         <div>
-          <Button variant="contained" component="label">
+          <Button sx={{ bgcolor: 'secondary.light' }}variant="contained" component="label">
             Upload Picture
             <input
               name="profile-picture"
@@ -160,14 +162,18 @@ export default function Register() {
             disabled
           >
             <input hidden accept="image/*" type="file" />
-            <Avatar />
+            {!file ? (
+              <Avatar />
+            ) : (
+              <CheckCircleIcon fontSize="large" sx={{ color: 'primary.dark' }} />
+            )}
           </IconButton>
         </div>
         <Button
           fullWidth
           sx={{ mt: 2 }}
           variant="contained"
-          color="success"
+          // color="success"
           type="submit"
         >
           Create Account

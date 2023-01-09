@@ -14,6 +14,7 @@ import AddBook from './components/AddBook';
 import BookIndex from './components/BookIndex';
 import MyLibrary from './components/Dashboard';
 import Favorites from './components/Favorites';
+import BookShow from './components/BookShow';
 
 window.Buffer = window.Buffer || require('buffer').Buffer;
 
@@ -46,6 +47,7 @@ const App = () => {
           <Route path="/dashboard/my-library" element={<MyLibrary />} />
           <Route path="/dashboard/add-book" element={<AddBook />} />
           <Route path="/diary-entries" element={<BookIndex />} />
+          <Route path="/diary-entries/:id" element={<BookShow />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/welcome" element={<Welcome />} />

@@ -61,6 +61,7 @@ const BookIndex = () => {
           {books?.map((book) => (
             <Grid item xs={4} key={book._id}>
               <BookCard
+                className="bookCard"
                 title={book.title}
                 author={book.author}
                 genre={book.genre}

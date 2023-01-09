@@ -25,7 +25,10 @@ export default function Welcome() {
       }}
     >
       <Box>
-        <h1>WELCOME</h1>
+        <h1 style={{ color: '#ac8b80' }}>WELCOME</h1>
+        <p style={{ color: '#ac8b80' }}>
+          The Diary Library: A hub to store all your favourite reads
+        </p>
         <Button
           variant="contained"
           color="primary"

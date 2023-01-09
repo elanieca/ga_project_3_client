@@ -2,25 +2,23 @@ import { useEffect, useState } from 'react';
 import { API } from '../lib/api';
 import DashboardNav from './common/DashboardNav';
 import { Container, Grid, Typography, Box, Button } from '@mui/material';
+import { AUTH } from '../lib/auth';
 
-// import BookCard from './common/BookCard';
+import BookCard from './common/BookCard';
 
-const MyLibrary = ({ searchedBooks }) => {
-  const [books, setBooks] = useState(searchedBooks);
+const MyLibrary = () => {
+  const [books, setBooks] = useState(null);
 
   useEffect(() => {
-    API.GET(API.ENDPOINTS.userBooks)
+    API.GET(
+      API.ENDPOINTS.userBooks(AUTH.getPayload().userId))
       .then(({ data }) => {
-        setBooks(data);
+        setBooks(data.myBooks); console.log(data.myBooks);
       })
       .catch(({ message, response }) => {
         console.error(message, response);
       });
   }, []);
-
-  useEffect(() => {
-    setBooks({ searchedBooks });
-  }, [searchedBooks]);
 
   return (
     <>
@@ -50,18 +48,18 @@ const MyLibrary = ({ searchedBooks }) => {
             alignItems: 'center'
           }}
         >
-          {/* {books?.map((book) => (
-            <Grid sx={{ mb: 2 }} item xs={4} key={book._id}> */}
-          {/* <BookCard
+          {books?.map((book) => (
+            <Grid sx={{ mb: 2 }} item xs={4} key={book._id}>
+              <BookCard
                 title={book.title}
                 author={book.author}
                 genre={book.genre}
                 image={book.image}
                 id={book._id}
                 alt={book.title}
-              /> */}
-          {/* </Grid>
-          ))} */}
+              />
+            </Grid>
+          ))}
         </Grid>
       </Container>
     </>
