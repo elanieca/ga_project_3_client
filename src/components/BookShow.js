@@ -47,7 +47,11 @@ const BookShow = () => {
     <>
       <Container maxWidth="lg" sx={{ display: 'flex' }} className="BookShow">
         <Box>
-          <img src={singleBook?.image} alt={singleBook?.title} />
+          <img
+            style={{ width: 300, height: 420 }}
+            src={singleBook?.image}
+            alt={singleBook?.title}
+          />
         </Box>
         <Box>
           <CardContent>
@@ -80,7 +84,6 @@ const BookShow = () => {
         <Typography color="text.secondary">
           Read Time: {singleBook?.timeRead}
         </Typography>
-
         <Typography className="review" variant="h5" component="p">
           {singleBook?.diaryEntry}
         </Typography>
