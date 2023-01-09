@@ -18,37 +18,40 @@ import DashboardNav from './common/DashboardNav';
 
 export default function AddBook() {
   const navigate = useNavigate();
+  const [error, setError] = useState(false);
+  const [availableGenres, setAvailableGenres] = useState(null);
   const [formData, setFormData] = useState({
     title: '',
     author: '',
     genre: '',
     image: '',
     timeRead: '',
-    rating: '',
     diaryEntry: ''
   });
-  const [error, setError] = useState(false);
-  const [availableGenres, setAvailableGenres] = useState([]);
+  const [rating, setRating] = useState(0);
+
   useEffect(() => {
     API.GET(API.ENDPOINTS.allGenreNames)
       .then(({ data }) => setAvailableGenres(data))
       .catch((e) => console.log(e));
   }, []);
 
+  const formDataWithRating = { ...formData, rating: rating };
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    console.log(formDataWithRating);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const rating = parseInt(formData.rating);
-    const newFormData = { ...formData, rating: rating };
 
-    API.POST(API.ENDPOINTS.allBooks, newFormData, API.getHeaders())
+    API.POST(API.ENDPOINTS.allBooks, formDataWithRating, API.getHeaders())
       .then(({ data }) => {
         navigate(`/diary-entries/${data._id}`);
       })
       .catch((e) => {
-        if (e.status === 301) {
+        if (e.status === 401) {
           setError(true);
         }
         console.log(e);
@@ -89,18 +92,17 @@ export default function AddBook() {
           </Box>
           <Box>
             <FormControl size="small" sx={{ mb: 2, width: '50%' }}>
-              <InputLabel value="genre" id="genre">
-                Genre
-              </InputLabel>
+              <InputLabel id="genre">Genre</InputLabel>
               <Select
                 required
                 labelId="genre"
+                value={formData.genre}
                 onChange={handleChange}
                 label="Genre"
                 name="genre"
               >
-                {availableGenres.map((genre) => (
-                  <MenuItem name="genre" key={genre._id} value={genre.name}>
+                {availableGenres?.map((genre) => (
+                  <MenuItem key={genre._id} value={genre.name}>
                     {genre.name}
                   </MenuItem>
                 ))}
@@ -135,10 +137,7 @@ export default function AddBook() {
             />
           </Box>
           <Box>
-            <BookRating
-              value={formData.rating}
-              handleOnChange={handleChange}
-            />
+            <BookRating rating={rating} setRating={setRating} />
           </Box>
           <Box>
             <TextareaAutosize

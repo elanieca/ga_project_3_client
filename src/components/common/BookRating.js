@@ -1,20 +1,16 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 
-export default function BookRating({ value, handleOnChange }) {
+export default function BookRating({ rating, setRating }) {
   return (
-    <Box
-      sx={{ ml: 0.4 }}
-    >
+    <Box sx={{ ml: 0.4 }}>
       <Typography component="legend">Rating</Typography>
       <Rating
+        typeof="number"
         name="rating"
-        value={value}
-        onChange={(event) => {
-          handleOnChange(event);
-        }}
+        rating={rating}
+        onChange={({ target: { value } }) => setRating(value)}
       />
     </Box>
   );
