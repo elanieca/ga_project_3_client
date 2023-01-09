@@ -40,7 +40,6 @@ export default function AddBook() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log(formDataWithRating);
   };
 
   const handleSubmit = (e) => {
