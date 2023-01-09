@@ -13,6 +13,8 @@ import {
 
 import { API } from '../../lib/api';
 import { AUTH } from '../../lib/auth';
+import { blue } from '@mui/material/colors';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -160,7 +162,11 @@ export default function Register() {
             disabled
           >
             <input hidden accept="image/*" type="file" />
-            <Avatar />
+            {!file ? (
+              <Avatar />
+            ) : (
+              <CheckCircleIcon fontSize="large" sx={{ color: 'green' }} />
+            )}
           </IconButton>
         </div>
         <Button
