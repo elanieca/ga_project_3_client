@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.fed86235.css",
+    "main.js": "/static/js/main.953cce85.js",
+    "static/media/book-background.png": "/static/media/book-background.157fe90587570d31b494.png",
+    "static/media/books-icon-2.png": "/static/media/books-icon-2.0e40aa1dd17ff90f66ce.png",
+    "index.html": "/index.html",
+    "main.fed86235.css.map": "/static/css/main.fed86235.css.map",
+    "main.953cce85.js.map": "/static/js/main.953cce85.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fed86235.css",
+    "static/js/main.953cce85.js"
+  ]
+}
