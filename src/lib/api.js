@@ -6,17 +6,17 @@ const getHeaders = () => ({
 });
 
 const ENDPOINTS = {
-  latestBooks: '/api/books/latest',
-  allBooks: '/api/books',
-  allGenreNames: '/api/genres/names',
-  login: '/api/login',
-  register: '/api/register',
+  latestBooks: `${process.env.REACT_APP_BASE_URL}/api/books/latest`,
+  allBooks: `${process.env.REACT_APP_BASE_URL}/api/books`,
+  allGenreNames: `${process.env.REACT_APP_BASE_URL}/api/genres/names`,
+  login: `${process.env.REACT_APP_BASE_URL}/api/login`,
+  register: `${process.env.REACT_APP_BASE_URL}/api/register`,
   cloudinary: `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
-  singleBook: (id) => `/api/books/${id}`,
-  singleGenre: (id) => `/api/genres/${id}/books`,
-  search: (query) => `/api/books/search?q=${query}`,
-  userBooks: (id) => `/api/users/${id}/books`,
-  userFavoriteBooks: (id) => `/api/users/${id}/favorite-books`
+  singleBook: (id) => `${process.env.REACT_APP_BASE_URL}/api/books/${id}`,
+  singleGenre: (id) => `${process.env.REACT_APP_BASE_URL}/api/genres/${id}/books`,
+  search: (query) => `${process.env.REACT_APP_BASE_URL}/api/books/search?q=${query}`,
+  userBooks: (id) => `${process.env.REACT_APP_BASE_URL}/api/users/${id}/books`,
+  userFavoriteBooks: (id) => `${process.env.REACT_APP_BASE_URL}/api/users/${id}/favorite-books`
 };
 
 const GET = (endpoint) => axios.get(endpoint);

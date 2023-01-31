@@ -15,7 +15,6 @@ export default function Welcome() {
       sx={{
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center',
         backgroundImage: `radial-gradient(circle, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2) ), url(${image})`,
         backgroundSize: 'cover',
         minWidth: '100vw',
@@ -24,9 +23,9 @@ export default function Welcome() {
         mt: -5
       }}
     >
-      <Box>
-        <h1 style={{ color: '#ac8b80' }}>WELCOME</h1>
-        <p style={{ color: '#ac8b80' }}>
+      <Box sx={{ mt: 16 }}>
+        <h1 style={{ color: '#e3e3e3' }}>WELCOME</h1>
+        <p style={{ color: '#e3e3e3' }}>
           The Diary Library: A hub to store all your favourite reads
         </p>
         <Button
