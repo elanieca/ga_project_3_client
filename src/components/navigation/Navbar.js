@@ -109,7 +109,7 @@ const Navbar = () => {
       onClose={handleMobileMenuClose}
     >
       <MenuItem onClick={handleProfileMenuOpen}>
-        <p>Profile</p>
+        <Typography>Profile</Typography>
       </MenuItem>
     </Menu>
   );
@@ -125,8 +125,10 @@ const Navbar = () => {
             noWrap
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
+            onClick={() => navigate('/')}
+            style={{ cursor: 'pointer' }}
           >
-            BOOKS
+            The Diary Library
           </Typography>
           <img src={Logo} />
           <Box sx={{ flexGrow: 1 }} />
