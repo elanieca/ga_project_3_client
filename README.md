@@ -1,7 +1,7 @@
 
 # THE DIARY LIBRARY APP
 
-![screenshot_homepage.png ](./src/images/screenshot_homepage.png "")
+![screenshot_welcome.png ](./src/assets/screenshot_welcome.png "")
 ## Project Description
 The Diary Library is a **Full-Stack** multi-pages web application which allows users to log their latest books. 
 Other key features include the ability to **register** & **login**. Users are also able select their **favorites** books which are shown on a dedicated page. Users can see the **latest posts** from all users as well.
@@ -25,14 +25,17 @@ Ensure that you have cloned or downloaded both front-end and back-end repositori
 ### Dependencies
 * MongoDB
 * Express
+* Jsonwebtoken
 * Cloudinary
 * MUI (React components library)
 * SASS
-* Axios packages
-* CORS packages
+* Axios 
+* CORS 
+* Seed.js
+
 
 ## Timeframe 
-This project was developed with two of my fellow classmates: [Melanie Sophie Speckens ](https://github.com/elanieca)and [Imogen Farr ](https://github.com/imogen-farr). As a group, we dedicated full day of planning using a detailed wireframe. Constant communication on our Trello board, Zoom and Slack was essential and version control on Git-Hub ensured a linear workflow which simulated a realistic work environment. GitHub/Zoom/Slack and Visual Studio Code.
+This project was developed with two of my fellow classmates: [Melanie Sophie Speckens ](https://github.com/elanieca)and [Imogen Farr ](https://github.com/imogen-farr). As a group, we dedicated full day of planning using a detailed wireframe. Constant communication on our Trello board, Zoom and Slack was essential and version control on Git-Hub ensured a linear workflow which simulated a realistic work environment. 
 
 ## Technologies Used
 * Excalidraw (wireframe)
@@ -47,6 +50,7 @@ This project was developed with two of my fellow classmates: [Melanie Sophie Spe
 * Google Fonts
 * Zoom
 * Slack
+* Trello
 * MongoDB Cloud (deployment database)
 * Netlify (deployment front-end)
 * Heroku (deployment back-end)
@@ -61,207 +65,167 @@ This project was developed with two of my fellow classmates: [Melanie Sophie Spe
 - **Be deployed online** publicly accessible.
 
 ## Planning
-![screenshot_wireframe.png](./src/assets/screenshot_wireframe.png"")
+![screenshot_wireframe.png ](./src/assets/screenshot_wireframe.png "")
 
 * Used Excalidraw to build a wireframe and design the basic layout of the app.
-  * The wireframe shows 9 pages, 3 of which are accessible wihout logging in: Welcome, Register, Login,
-  * Once the User is logged in, he has access to: Homepage, Latest Posts, Book Index, Favorite Books, Book Show, Add A Book.
+  * The wireframe shows 8 pages, 3 of which are accessible wihout having to login: Welcome, Register, Login as seen above.
+
+![screenshot_wireframe2.png ](./src/assets/screenshot_wireframe2.png "")
+
+  * Once the User is logged in, he has access to: Activity Feed, Book Index, Favorite Books, Book Show and Add A Book pages.
   * A navigation bar is used to navigate between each main pages.
 
 ## Build/Code Process
 
-### Day One
+### Developing The API - Day One 
+
+* Excalidraw/Trello
+  * Created a wireframe with each pages/components and general flow of our app. This was a crucial part of our project as after completing the wireframe, we were able to write down each of the API requirements for our app. (Alex/Melanie/Imogen)
+  * Divided each task for the day on a shared Trello board which allowed us to keep track on our work and ensure we are not blocking each other's work.
+
+![screenshot_trello.png ](./src/assets/screenshot_trello.png "")
 
 * Installation
-  * Created a new repository on GitHub and cloned it locally. (Alex/Joel)
-  * Initial setup ot the React application using MacOs terminal. (Alex/Joel)
-  * Installed Axios Packages and Bulma library. (Alex/Joel)
+  * Created a new repository on GitHub. (Melanie)
+  * Initial setup of the backend API application by installing the dependencies (Alex/Melanie/Imogen).
+    * Express
+    * Axios 
+    * CORS 
+    * Mongoose
+    * Nodemon
+  * Created a `.gitignore` file and added `“node module”; “.env”; “DS_store”`.
+  * Added the boiler plate code below for our API to connect to our database (Melanie)
 
-* Excalidraw  
-  * Created a wireframe with each pages/components required for the app. (Alex/Joel)
-  * API research (Alex/Joel)
+```javascript
+  import express from 'express';
+  import Router from './config/router.js';
+  import cors from 'cors';
+  import { PORT } from './config/environment.js';
+  import { connectDb } from './db/helpers.js';
 
-### Characters List:
-![screenshot_index.png](./src/images/screenshot_index.png"")
-  * Created the `api.js` with the code (below) to fetch the required data based on our wireframe. (Alex/Joel)
-  ```javascript
-  import axios from 'axios';
+  const app = express();
+  app.use(cors());
+  app.use(express.json());
+  app.use('/api', Router);
 
-  const BASE_URL = 'https://rickandmortyapi.com/api/character';
-  const EPISODE_URL = 'https://rickandmortyapi.com/api/episode';
+  async function startServer() {
+    try {
+      await connectDb();
+      console.log('connected to mongodb');
+      app.listen(PORT, () => console.log(`app is listening on port ${PORT}`));
+    } catch (err) {
+      console.log('ERROR', err);
+    }
+  }
 
-  export const getAllEpisodes = (pageNumber) =>
-    axios.get(`${EPISODE_URL}/?page=${pageNumber}`);
-
-  export const getAllCharacters = (pageNumber) =>
-    axios.get(`${BASE_URL}/?page=${pageNumber}`);
-
-  export const getCharacterBio = (characterId) =>
-  axios.get(`${BASE_URL}/${characterId}`);
-
+startServer();
   ```
-  * Created the NavBar (Joel)
-  * Created Home and Characters List buttons on the NavBar. (Joel)
-  * Created Characters List page and fetched data from API. (Alex)
-  * As our API was only showing 20 characters per page, we created pagination to 
-show all characters. (Joel)
+* Created `UserSchema, BookSchema, GenreSchema` (Melanie, Imogen and Alex respectively)
 
-### Day Two
+### Developing the API - Day Two 
 
-### Characters Bio:
-![screenshot_characters.png](./src/images/screenshot_characters.png "")
+* Created `userController, secureRoute, Seeding` tested all functions on Postman (Melanie)
 
-  * Created Characters Bio page and fetched data from API. (Alex)
-  * Maniuplated data to show a different icon for Characters Status depending on result. (Alex)
-    * for example, if the Character's Status is "Alive", ✅ icon appears, however if he is "Dead" the icon ☠️ is showed.
+* Created `seed.js`, `bookController` and `Routes` (Imogen)
 
-### Episodes List:
-![screenshot_episodes.png](./src/images/screenshot_episodes.png "")
+* Created `genreController` and `Routes`, testing all functions on Postman. Collaborated with Imogen to create the `seed.js` file.
 
-  * Created Episodes List Page. As we did not have images of each episodes, we decided
-  to show random images of characters who appeared in that specific episode, see code below  (Alex/Joel)
-  ```javascript
-  import axios from 'axios';
-  import { useState, useEffect } from 'react';
 
-  const randomCharacter =
-    characters[Math.ceil(Math.random() * characters.length)];
+### Developing The React app - Day One
 
-  useEffect(() => {
-    axios.get(randomCharacter).then((res) => {
-      console.log({ res });
-      setDisplayCharacter(res.data.image);
-    });
-  }, []); 
-  ```
+* Installation
+  * Created a new repository on GitHub. (Melanie)
+  * Initial setup of the frontend application by installing the dependencies (Alex/Melanie/Imogen).
+    * Axios 
+    * CORS 
+    * SASS
+    * MUI
+  * Created a `.gitignore` file and added `“node module”; “.env”; “DS_store”`.
+  * Added the boiler plate code below to connect the front-end to the back-end (Melanie)
+```javascript
+import axios from 'axios';
+import { AUTH } from './auth';
 
-  * Manipulated data to show the number of episodes each characters appeared on.(Alex)
-  * Added syling to Navbar and Homepage. (Joel)
-  * Added styling to Characters List and Bio. (Alex)
-  * Deployed the project onto Netflify (Alex/Joel)
+const getHeaders = () => ({
+  headers: { Authorization: `Bearer ${AUTH.getToken()}` }
+});
+
+const ENDPOINTS = {
+  latestBooks: `${process.env.REACT_APP_BASE_URL}/api/books/latest`,
+  allBooks: `${process.env.REACT_APP_BASE_URL}/api/books`,
+  allGenreNames: `${process.env.REACT_APP_BASE_URL}/api/genres/names`,
+  login: `${process.env.REACT_APP_BASE_URL}/api/login`,
+  register: `${process.env.REACT_APP_BASE_URL}/api/register`,
+  cloudinary: `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
+  singleBook: (id) => `${process.env.REACT_APP_BASE_URL}/api/books/${id}`,
+  singleGenre: (id) => `${process.env.REACT_APP_BASE_URL}/api/genres/${id}/books`,
+  search: (query) => `${process.env.REACT_APP_BASE_URL}/api/books/search?q=${query}`,
+  userBooks: (id) => `${process.env.REACT_APP_BASE_URL}/api/users/${id}/books`,
+  userFavoriteBooks: (id) => `${process.env.REACT_APP_BASE_URL}/api/users/${id}/favorite-books`
+};
+
+const GET = (endpoint) => axios.get(endpoint);
+const POST = (endpoint, body, headers) =>
+  headers ? axios.post(endpoint, body, headers) : axios.post(endpoint, body);
+const PUT = (endpoint, body, headers) => axios.put(endpoint, body, headers);
+const DELETE = (endpoint, headers) => axios.delete(endpoint, headers);
+
+export const API = { GET, POST, PUT, DELETE, ENDPOINTS, getHeaders };
+```
+
+### Developing The React app - Day Two
+
+* Created the `NavBar` and `Drawer` which allows the user to navigate between the main pages. (Melanie)
+
+![screenshot_wireframe2.png ](./src/assets/screenshot_drawer.png "")
+![screenshot_wireframe2.png ](./src/assets/screenshot_navigation.png "")
+
+* Created a MUI theme which is a great feature that allows a light/dark mode when changing your settings on your machine. (Melanie)
+
+* Created `BookIndex`, `BookShow` and `BookCard` pages. (Imogen)
+
+![screenshot_index.png ](./src/assets/screenshot_index.png "")
+![screenshot_book_show.png ](./src/assets/screenshot_book_show.png "")
+
+* In the the image below, we can see the Homepage which shows the `LatestPosts` from all users. 
+
+![screenshot_latest_posts.png ](./src/assets/screenshot_latest_posts.png "")
+
+* Created `Users Dashboard` which contains 3 pages. (Alex)
+  * `My Library` shows a list of all the books the User has added on the app
+  * `Favorites` shows a list of all the books the User selected as "Favorite" from the `Index` page.
+  * `AddBook` allows the User to add a new entry, all fields must be completed in order to save the book to the database.
+
+
+![screenshot_add_book.png ](./src/assets/screenshot_add_book.png "")
+
+### Developing The React app - Day Three
+
+* Created a refresh button for `LatestPosts`. (Melanie)
+* Added responsive design for mobile, see picture below. (Melanie)
+
+![screenshot_mobile.png ](./src/assets/screenshot_mobile.png "")
+
+* Created `AddRemoveFavorite` function. (Imogen)
+* Created `usersFavoriteBooks` page. (Alex)
 
 
 ## Challenges
-* Using Git/GitHub for the first time as a tool to collaborate slowed us down at the start however with some practice, we speeded up the process and reduced the amount of merging conflicts considerably.
-* Using a CSS library for the first time also slowed down the styling of our app as we had
-to read the documentation.
+* The process of planning our back-end app was challenging as we had to think ahead on which features we will want to have in our app. Once we made those decisions it was easier for us to give ourselves a timeline as we expected to start working on our front-end on day 3.
 
 ## Wins
-* This was our first project involving back-end programming and fetching and API, the process was highly enjoyable and our communication really helped getting things done in time.
-* The use of CSS library made our styling simpler even though we lost valuable time in the process of reading the documentation.
+* This was our first project involving a full-stack application and it was really fun being able to build something of our own making with a lot of creative freedom. Great teamwork was essential amd we were supporting each other when we had challenges.
 
 ## Key Learning/Takeways
-* Pair-Programming 
-* API fetching
-* Use of Bulma (CSS library) for the first time 
+* Extensive planning and communication 
+* Building of a full-stack app for the first time
+* Use of MUI (React components library) for the first time 
 
 ## Bugs
-![screenshot_card_error.png](./src/images/screenshot_card_error.png "")
-
-* In the Episodes List page above, when an image does not load, the image `alt` is showed, however, what should show is a generic image such as the example below for Characters Card.
-
-![screenshot_card.png](./src/images/screenshot_card.png "")
-
+* Some of the images in the `BookCard` are not showing with the right format which can be due to some CSS rules. 
 
 ## Future Improvements
-* Adding a condition in which second image is loaded onto a card if the fist image link is invalid.
-* Adding a search function to the Navbar
-
+* We would have like to find the time to show the avatar of User logged in on the `Navbar` and `Register` page, 
 
 ## THANKS FOR READING!
 
-
-
-
-
-
-
-
-
-
-
-
-
-DAY ONE
-
-Mell, Imogen, Alex
-Created Wireframe with excalidraw 
-LINK TO EXCALIDRAW
-Created book-diary-api
-Created repository with boilerplate api request, changed eslint/prettier settings
-Created gitignore file and added “node module”, “.env”, “DS_store”
-
-Installed dependencies:
-
-    "dev": "npx nodemon index.js,
-    "seed": "node db/seed.js
-  "dependencies": 
-    "bcrypt":
-    "cors":
-    "dotenv": 
-    "express": 
-    "jsonwebtoken":
-    "mongoose"
-    "mongoose-hidden"
-    "Mongoose-unique-validator"
-
-Mell 
-UserSchema
-
-Imogen
-BookSchema
-
-Alex
-GenreSchema
-
-
-DAY TWO
-
-Mell 
-userController, secureRoute, Seeding, testing all functions on Postman
-
-Imogen 
-bookController and Routes, Seeding
-
-Alex
-genreController and Routes, Seeding, testing all functions on Postman
-
-DAY THREE
-
-
-Mell 
-Created Repo for React App
-Imogen
- 
-Alex 
-
-DAY FOUR
-
-Mell 
-Created NavBar and Theme
-
-Imogen
-Created BookShow and BookCard 
-
-Alex 
-Created Register, LatestPosts/Ratings, Dashboard, Profile Picture
-
-DAY FIVE
-
-Mell
-Avatar show on Navbar and Register page, Refresh button for LatestPosts
-
-Imogen
-AddRemoveFavorite function
-
-Alex
-usersFavoriteBooks
-
-
-TODO:
-
-Register
-Add avatar picture 
-
-PostCard
-Check that On click postcard should lead to BookShow
