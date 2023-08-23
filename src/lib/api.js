@@ -19,7 +19,7 @@ const ENDPOINTS = {
   userFavoriteBooks: (id) => `${process.env.REACT_APP_BASE_URL}/api/users/${id}/favorite-books`
 };
 
-const GET = (endpoint) => axios.get(endpoint);
+const GET = (endpoint, headers) => axios.get(endpoint, headers);
 const POST = (endpoint, body, headers) =>
   headers ? axios.post(endpoint, body, headers) : axios.post(endpoint, body);
 const PUT = (endpoint, body, headers) => axios.put(endpoint, body, headers);

@@ -10,10 +10,9 @@ const MyLibrary = () => {
   const [books, setBooks] = useState(null);
 
   useEffect(() => {
-    API.GET(API.ENDPOINTS.userFavoriteBooks(AUTH.getPayload().userId))
+    API.GET(API.ENDPOINTS.userFavoriteBooks(AUTH.getPayload().userId), API.getHeaders())
       .then(({ data }) => {
-        setBooks(data.myBooks);
-        console.log(data.myBooks);
+        setBooks(data.user.favoriteBooks); console.log('LOG', data.user.favoriteBooks);
       })
       .catch(({ message, response }) => {
         console.error(message, response);

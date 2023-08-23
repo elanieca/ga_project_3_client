@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-
 import {
   Card,
   CardContent,
@@ -36,7 +35,8 @@ export default function BookCard({ title, author, genre, image, id }) {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'flexstart',
-            alignItems: 'center'
+            alignItems: 'center',
+            width: '100px'
           }}
         >
           <FavoriteButton id={id} />
@@ -46,7 +46,8 @@ export default function BookCard({ title, author, genre, image, id }) {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
-            alignItems: 'flex-start'
+            alignItems: 'flex-start',
+            width: '250px'
           }}
         >
           <Box>

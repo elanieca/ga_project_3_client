@@ -191,7 +191,7 @@ export const API = { GET, POST, PUT, DELETE, ENDPOINTS, getHeaders };
 
 ![screenshot_latest_posts.png ](./src/assets/screenshot_latest_posts.png "")
 
-* Created `Users Dashboard` which contains 3 pages. (Alex)
+* Created **Users Dashboard** which contains 3 pages: (Alex)
   * `My Library` shows a list of all the books the User has added on the app
   * `Favorites` shows a list of all the books the User selected as "Favorite" from the `Index` page.
   * `AddBook` allows the User to add a new entry, all fields must be completed in order to save the book to the database.
